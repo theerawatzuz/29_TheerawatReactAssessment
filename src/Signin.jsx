@@ -17,9 +17,6 @@ export default function Signin() {
       const user = data.find((item) => item.name === name && item.lastname === lastname);
 
       if (user) {
-        if (user.position === "Admin") {
-          localStorage.setItem('tokenAdmin', 'true');
-        }
         alert("Login successful");
         window.location.href = '/Home';
       } else {

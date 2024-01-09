@@ -75,7 +75,7 @@ export default function SignUp() {
             .then(result => {
                 if (result['message'] === 'created') {
                     alert("Create user successful");
-                    window.location.href = '/Signin';
+                    window.location.href = '/Owner';
                 }
                 else {
                     alert("Sever is Unavailable, Please contact admin.")
