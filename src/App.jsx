@@ -8,6 +8,7 @@ import {CardContent} from '@mui/material';
 import {CardMedia} from '@mui/material';
 import {Typography} from '@mui/material';
 import {CardActionArea } from '@mui/material';
+import ProfilePic from '../public/profile.webp' 
 
 
 export default function App() {
@@ -21,7 +22,7 @@ export default function App() {
                 <CardMedia
                 component="img"
                 height="300"
-                image="https://unsplash.com/photos/a-man-standing-in-front-of-a-tall-waterfall-8F4npKj5U14"
+                image={ProfilePic}
                 alt="profile-Pic"
                 />
                 <CardContent>
