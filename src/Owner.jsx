@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -6,151 +6,137 @@ import Layout from './Layout';
 import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material';
 import { Paper } from '@mui/material';
-import {Table} from '@mui/material';
-import {TableBody} from '@mui/material';
-import {TableCell} from '@mui/material';
-import {TableContainer} from '@mui/material';
-import {TableHead} from '@mui/material';
-import {TableRow} from '@mui/material';
-import {ButtonGroup} from '@mui/material';
-import {Dialog} from '@mui/material';
-import {DialogTitle } from '@mui/material';
-import {DialogContent} from '@mui/material';
-import {DialogContentText } from '@mui/material';
-import {DialogActions  } from '@mui/material';
-import {TextField } from '@mui/material';
-import {Grid } from '@mui/material';
+import { Table } from '@mui/material';
+import { TableBody } from '@mui/material';
+import { TableCell } from '@mui/material';
+import { TableContainer } from '@mui/material';
+import { TableHead } from '@mui/material';
+import { TableRow } from '@mui/material';
+import { ButtonGroup } from '@mui/material';
+import { Dialog } from '@mui/material';
+import { DialogTitle } from '@mui/material';
+import { DialogContent } from '@mui/material';
+import { DialogContentText } from '@mui/material';
+import { DialogActions } from '@mui/material';
+import { TextField } from '@mui/material';
+import { Grid } from '@mui/material';
 import { MenuItem } from '@mui/material';
 import Link from '@mui/material/Link';
+import axios from 'axios';
 
 const PositionData = [
-    {
-      value: 'CEO',
-      label: 'CEO',
-    },
-    {
-      value: 'CTO',
-      label: 'CTO'
-    },
-    {
-      value: 'Manager',
-      label: 'Manager'
-    },
-    {
-      value: 'Programmer',
-      label: 'Programmer'
-    },
-    {
-      value: 'Staff',
-      label: 'Staff'
-    },
-    {
-      value: 'Finance',
-      label: 'Finance'
-    },
-    {
-      value: 'Software Tester',
-      label: 'Software Tester'
-    },
-    {
-      value: 'Other',
-      label: 'Other'
-    },
-  ];
+  {
+    value: 'CEO',
+    label: 'CEO',
+  },
+  {
+    value: 'CTO',
+    label: 'CTO'
+  },
+  {
+    value: 'Manager',
+    label: 'Manager'
+  },
+  {
+    value: 'Programmer',
+    label: 'Programmer'
+  },
+  {
+    value: 'Staff',
+    label: 'Staff'
+  },
+  {
+    value: 'Finance',
+    label: 'Finance'
+  },
+  {
+    value: 'Software Tester',
+    label: 'Software Tester'
+  },
+  {
+    value: 'Other',
+    label: 'Other'
+  },
+];
 
 export default function Owner() {
-    const [items, setItems] = useState([]);
-    const [open, setOpen] = React.useState(false);
-    const [selectedUserId, setSelectedUserId] = React.useState(null);
-  
-    const [name, setName] = useState("");
-    const [lastname, setLastname] = useState("");
-    const [position, setPosition] = useState("");
+  const [items, setItems] = useState([]);
+  const [open, setOpen] = React.useState(false);
+  const [selectedUserId, setSelectedUserId] = React.useState(null);
 
-    useEffect(() => {
-      UserGet();
-    }, []);
-  
-    const UserGet = () => {
-      fetch("https://jsd5-mock-backend.onrender.com/members")
-        .then((res) => res.json())
-        .then((result) => {
-          setItems(result);
-          setIsLoaded(true);
-        });
-    };
-  
-    const UserDelete = (id) => {
-      var raw = "";
-  
-      var requestOptions = {
-        method: "DELETE",
-        body: raw,
-        redirect: "follow",
-      };
-  
-      fetch(`https://jsd5-mock-backend.onrender.com/member/${id}`, requestOptions)
-        .then((response) => response.json())
-        .then((result) => {
-          if (result["message"] === `deleted ${id}`) {
-            alert("Delete user successful");
-            window.location.href = "/Owner";
-          } else {
-            alert("Server is Unavailable, Please contact admin.");
-          }
-        })
-        .catch((error) => console.log("error", error));
-    };
-  
-    const UserEdit = () => {
-        const updatedUser = {
-          id: selectedUserId,
-          name: name,
-          lastname: lastname,
-          position: position,
-        };
-      
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-      
-        var requestOptions = {
-          method: 'PUT',
-          headers: myHeaders,
-          body: JSON.stringify(updatedUser),
-          redirect: 'follow',
-        };
-        fetch(`https://jsd5-mock-backend.onrender.com/members`, requestOptions)
-        .then(response => response.json())
-        .then(result => {
-            if (result["message"] === 'updated') {
-                window.location.href = "/Owner";
-              } else {
-                alert("Server is Unavailable, Please contact admin.");
-              }
-        })
-        .catch(error => console.log('error', error));
-        setOpen(false);
+  const [name, setName] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [position, setPosition] = useState("");
+
+  useEffect(() => {
+    UserGet();
+  }, []);
+
+  const UserGet = () => {
+    axios.get("https://jsd5-mock-backend.onrender.com/members")
+      .then((response) => {
+        setItems(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  };
+
+  const UserDelete = (id) => {
+    axios.delete(`https://jsd5-mock-backend.onrender.com/member/${id}`)
+      .then((response) => {
+        if (response.data.message === `deleted ${id}`) {
+          alert("Delete user successful");
+          window.location.href = "/Owner";
+        } else {
+          alert("Server is Unavailable, Please contact admin.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting user:", error);
+      });
+  };
+
+  const UserEdit = () => {
+    const updatedUser = {
+      id: selectedUserId,
+      name: name,
+      lastname: lastname,
+      position: position,
     };
 
+    axios.put(`https://jsd5-mock-backend.onrender.com/members`, updatedUser)
+      .then((response) => {
+        if (response.data.message === 'updated') {
+          window.location.href = "/Owner";
+        } else {
+          alert("Server is Unavailable, Please contact admin.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error updating user:", error);
+      });
 
-  
-    const handleClickOpen = (id) => {
-        const selectedUser = items.find((user) => user.id === id)
-        setSelectedUserId(id);
-        setName(selectedUser.name);
-        setLastname(selectedUser.lastname);
-        setPosition(selectedUser.position);
-    
-        setOpen(true);
-    };
-  
-    const handleClose = () => {
-        setName("");
-        setLastname("");
-        setPosition("");
-      setOpen(false);
-    };
-  
+    setOpen(false);
+  };
+
+  const handleClickOpen = (id) => {
+    const selectedUser = items.find((user) => user.id === id)
+    setSelectedUserId(id);
+    setName(selectedUser.name);
+    setLastname(selectedUser.lastname);
+    setPosition(selectedUser.position);
+
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setName("");
+    setLastname("");
+    setPosition("");
+    setOpen(false);
+  };
+
     return (
       <Layout>
         <React.Fragment>
