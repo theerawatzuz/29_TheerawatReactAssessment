@@ -1,14 +1,39 @@
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
 
-const Navbar = () => {
+
+
+
+export default function Navbar() {
     return (
-        <ul>
-            <li><a href={'/'}>Main</a></li>
-            <li><a href={'/page-2'}>Page 2</a></li>
-            <li><a href={'/Login'}>Login</a></li>
-            <li><a href={'/Signup'}>SignUp</a></li>
-            <li><a href={'/Error'}>Error</a></li>
-        </ul>
-    )
-}
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static">
+          <Toolbar>
+           
+{/*             
+          {location.pathname !== '/main' && (
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              <a href="/Home">29 Theerawat-JSD6</a>
+            </Typography>
+          )} */}
 
-export default Navbar
+            <Typography pography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              <a href="/Home">29 Theerawat-JSD6</a>
+            </Typography>
+
+
+            <Button color="inherit" href="/Signin">Login</Button>
+            <Button color="inherit" href="/Signup">Register</Button>
+            <Button color="inherit" href="/Home">Home</Button>
+            <Button color="inherit" href="/Owner">Owner</Button>
+          </Toolbar>
+        </AppBar>
+      </Box>
+    );
+  }

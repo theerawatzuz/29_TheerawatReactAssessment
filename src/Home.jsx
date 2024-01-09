@@ -1,13 +1,13 @@
 import Layout from './Layout'
 
-const Login = () => {
+const Home = () => {
     return (
         <Layout>
             <div>
-                Login Work!
+                Home Work!
             </div>
         </Layout>
     )
 }
 
-export default Login
+export default Home

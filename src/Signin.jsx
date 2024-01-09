@@ -1,13 +1,13 @@
 import Layout from './Layout'
 
-const Page2 = () => {
+const Signin = () => {
     return (
         <Layout>
             <div>
-                Page 2
+                SignIn Work!
             </div>
         </Layout>
     )
 }
 
-export default Page2
+export default Signin
