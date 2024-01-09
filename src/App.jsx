@@ -21,7 +21,7 @@ export default function App() {
                 <CardMedia
                 component="img"
                 height="300"
-                image="../public/profile.webp"
+                image="https://unsplash.com/photos/a-man-standing-in-front-of-a-tall-waterfall-8F4npKj5U14"
                 alt="profile-Pic"
                 />
                 <CardContent>
