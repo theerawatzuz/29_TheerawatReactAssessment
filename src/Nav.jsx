@@ -30,7 +30,7 @@ export default function Navbar() {
             </Typography>
 
 
-            {location.pathname !== '/Signup' && (
+            {location.pathname !== '/Signup' && location.pathname !== '/Signin' && (
             <>
               <Button color="inherit" href="/Signin">
                 Login
@@ -52,6 +52,15 @@ export default function Navbar() {
                 already have an account?
                 <Button color="inherit" href="/Signin">
                     login
+                </Button>
+              </>
+          )}
+
+          {location.pathname === '/Signin' && (
+            <>
+                Don't have any account yet?
+                <Button color="inherit" href="/Signup">
+                    Register
                 </Button>
               </>
           )}

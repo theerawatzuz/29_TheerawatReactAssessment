@@ -9,8 +9,16 @@ import { Button, Paper } from '@mui/material';
 
 const PositionData = [
     {
+      value: 'Admin',
+      label: 'Admin',
+    },
+    {
+      value: 'User',
+      label: 'User'
+    },
+    {
       value: 'CEO',
-      label: 'CEO',
+      label: 'CEO'
     },
     {
       value: 'CTO',
@@ -67,7 +75,7 @@ export default function SignUp() {
             .then(result => {
                 if (result['message'] === 'created') {
                     alert("Create user successful");
-                    window.location.href = '/';
+                    window.location.href = '/Signin';
                 }
                 else {
                     alert("Sever is Unavailable, Please contact admin.")
