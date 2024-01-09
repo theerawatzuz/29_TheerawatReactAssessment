@@ -6,11 +6,13 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useLocation } from 'react-router-dom';
 
 
 
 
 export default function Navbar() {
+    const location = useLocation();
     return (
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
@@ -24,14 +26,35 @@ export default function Navbar() {
           )} */}
 
             <Typography pography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              <a href="/Home">29 Theerawat-JSD6</a>
+              <a href='/'>29 Theerawat-JSD6</a>
             </Typography>
 
 
-            <Button color="inherit" href="/Signin">Login</Button>
-            <Button color="inherit" href="/Signup">Register</Button>
-            <Button color="inherit" href="/Home">Home</Button>
-            <Button color="inherit" href="/Owner">Owner</Button>
+            {location.pathname !== '/Signup' && (
+            <>
+              <Button color="inherit" href="/Signin">
+                Login
+              </Button>
+              <Button color="inherit" href="/Signup">
+                Register
+              </Button>
+                <Button color="inherit" href="/Home">
+                    Home
+                </Button>
+                <Button color="inherit" href="/Owner">
+                    Owner
+                </Button>
+            </>
+          )}
+
+          {location.pathname === '/Signup' && (
+            <>
+                already have an account?
+                <Button color="inherit" href="/Signin">
+                    login
+                </Button>
+              </>
+          )}
           </Toolbar>
         </AppBar>
       </Box>

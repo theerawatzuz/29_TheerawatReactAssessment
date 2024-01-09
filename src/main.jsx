@@ -11,6 +11,7 @@ import Home from './Home';
 import Signin from './Signin';
 import SignUp from './Signup';
 import Error from './Error';
+import Owner from './Owner';
 
 
 const router = createBrowserRouter([
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: '/Error',
     element: <Error />
+  },
+  {
+    path: '/Owner',
+    element: <Owner />
   },
 
 ])
